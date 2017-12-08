@@ -7,10 +7,14 @@ description = """
 Testkit for Exonum blockchain framework, allowing to test service APIs
 synchronously.
 """
+keywords = ["test", "blockchain", "framework", "exonum"]
 categories = ["test"]
 
+[badges]
+travis-ci = { repository = "exonum/exonum-testkit" }
+
 [dependencies]
-exonum = "0.3.0"
+exonum = "0.4.0"
 futures = "0.1.14"
 serde = "1.0.0"
 serde_json = "1.0.0"
@@ -22,6 +26,3 @@ router = "0.6.0"
 [dev-dependencies]
 bodyparser = "0.8.0"
 serde_derive = "1.0.0"
-
-[patch.crates-io]
-exonum = { git = "https://github.com/exonum/exonum", rev = "f0f690731b8871533dfd6e2368f03ef3ba182e47" }
