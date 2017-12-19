@@ -196,7 +196,7 @@ impl TestNetwork {
     }
 
     /// Updates the test network by the new set of nodes.
-    pub fn update<I: IntoIterator<Item = TestNode>>(&mut self, mut us: TestNode, validators: I) {
+    fn update<I: IntoIterator<Item = TestNode>>(&mut self, mut us: TestNode, validators: I) {
         let validators = validators
             .into_iter()
             .enumerate()
@@ -332,7 +332,7 @@ impl TestNode {
     }
 
     /// Change node role.
-    pub fn change_role(&mut self, role: Option<ValidatorId>) {
+    fn change_role(&mut self, role: Option<ValidatorId>) {
         self.validator_id = role;
     }
 
@@ -729,7 +729,7 @@ impl TestKit {
                 Committed(cfg_proposal) => {
                     if cfg_proposal.actual_from() == actual_from {
                         // Modify the self configuration
-                        self.network_mut().update(
+                        self.network.update(
                             cfg_proposal.us,
                             cfg_proposal.validators,
                         );
@@ -859,18 +859,13 @@ impl TestKit {
     }
 
     /// Returns the leader on the current height. At the moment first validator.
-    pub fn leader(&self) -> &TestNode {
+    fn leader(&self) -> &TestNode {
         &self.network().validators[0]
     }
 
     /// Returns the reference to test network.
     pub fn network(&self) -> &TestNetwork {
         &self.network
-    }
-
-    /// Returns the mutable reference to test network for manual modifications.
-    pub fn network_mut(&mut self) -> &mut TestNetwork {
-        &mut self.network
     }
 
     /// Returns a copy of the actual configuration of the testkit.
