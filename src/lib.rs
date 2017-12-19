@@ -172,7 +172,7 @@ impl TestNetwork {
     pub fn new(validator_count: u16) -> Self {
         let validators = (0..validator_count)
             .map(ValidatorId)
-            .map(TestNode::new_validator)
+            .map(TestNode::validator)
             .collect::<Vec<_>>();
 
         let us = validators[0].clone();
@@ -240,7 +240,7 @@ pub struct TestNode {
 
 impl TestNode {
     /// Creates a new auditor.
-    pub fn new_auditor() -> Self {
+    pub fn auditor() -> Self {
         let (consensus_public_key, consensus_secret_key) = crypto::gen_keypair();
         let (service_public_key, service_secret_key) = crypto::gen_keypair();
 
@@ -254,7 +254,7 @@ impl TestNode {
     }
 
     /// Creates a new validator with the given id.
-    pub fn new_validator(validator_id: ValidatorId) -> Self {
+    pub fn validator(validator_id: ValidatorId) -> Self {
         let (consensus_public_key, consensus_secret_key) = crypto::gen_keypair();
         let (service_public_key, service_secret_key) = crypto::gen_keypair();
 
@@ -268,7 +268,7 @@ impl TestNode {
     }
 
     /// Constructs a new node from the given keypairs.
-    pub fn from_parts(
+    pub fn new(
         consensus_keypair: (crypto::PublicKey, crypto::SecretKey),
         service_keypair: (crypto::PublicKey, crypto::SecretKey),
         validator_id: Option<ValidatorId>,
@@ -405,7 +405,7 @@ impl fmt::Debug for TestKitBuilder {
 impl TestKitBuilder {
     /// Creates testkit for the validator node.
     pub fn validator() -> Self {
-        let us = TestNode::new_validator(ValidatorId(0));
+        let us = TestNode::validator(ValidatorId(0));
         TestKitBuilder {
             validators: vec![us.clone()],
             services: Vec::new(),
@@ -415,9 +415,9 @@ impl TestKitBuilder {
 
     /// Creates testkit for the auditor node.
     pub fn auditor() -> Self {
-        let us = TestNode::new_auditor();
+        let us = TestNode::auditor();
         TestKitBuilder {
-            validators: vec![TestNode::new_validator(ValidatorId(0))],
+            validators: vec![TestNode::validator(ValidatorId(0))],
             services: Vec::new(),
             us,
         }
@@ -431,7 +431,7 @@ impl TestKitBuilder {
         );
         let additional_validators = (self.validators.len() as u16..validators_count)
             .map(ValidatorId)
-            .map(TestNode::new_validator);
+            .map(TestNode::validator);
         self.validators.extend(additional_validators);
         self
     }
