@@ -212,20 +212,6 @@ impl TestNetwork {
         self.validators = validators;
         self.us.clone_from(&us);
     }
-
-    /// Returns service public key of the validator with given id.
-    pub fn service_public_key_of(&self, id: ValidatorId) -> Option<&crypto::PublicKey> {
-        self.validators().get(id.0 as usize).map(|x| {
-            &x.service_public_key
-        })
-    }
-
-    /// Returns consensus public key of the validator with given id.
-    pub fn consensus_public_key_of(&self, id: ValidatorId) -> Option<&crypto::PublicKey> {
-        self.validators().get(id.0 as usize).map(|x| {
-            &x.consensus_public_key
-        })
-    }
 }
 
 /// An emulated node in the test network.

@@ -706,10 +706,10 @@ fn test_explorer_single_block() {
         assert_eq!(precommit.height(), Height(1));
         assert_eq!(*precommit.block_hash(), info.block.hash());
         let pk = testkit
-            .network()
-            .consensus_public_key_of(precommit.validator())
-            .expect("Cannot find validator id");
-        assert!(precommit.verify_signature(pk));
+            .validator(precommit.validator())
+            .public_keys()
+            .consensus_key;
+        assert!(precommit.verify_signature(&pk));
         validators.insert(precommit.validator());
     }
 
