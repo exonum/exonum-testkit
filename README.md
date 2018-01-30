@@ -15,7 +15,7 @@ Just add the following line to the `Cargo.toml`:
 
 ```toml
 [dev-dependencies]
-exonum-testkit = "0.1.0"
+exonum-testkit = "*"
 ```
 
 [Read more...][tutorial]
