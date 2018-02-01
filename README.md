@@ -5,6 +5,9 @@
 [![Build status][appveyor-image]][appveyor-url]
 [![Gitter][gitter-image]][gitter-url]
 
+> **NOTE**: This repository has been moved inside the [Exonum main repository](exonum-main). All 
+> new work will be performed here.
+
 Testkit for Exonum blockchain is a framework that allows to test operation of the whole service.
 Specifically, it allows to test transaction execution and APIs in the synchronous environment
 (without consensus algorithm) and in the same system process.
@@ -38,3 +41,4 @@ Licensed under the Apache License (Version 2.0). See [LICENSE](LICENSE) for deta
 [crates-io-image]: https://img.shields.io/crates/v/exonum-testkit.svg
 [crates-io-url]: https://crates.io/crates/exonum-testkit
 [tutorial]: TUTORIAL.md
+[exonum-main]: https://github.com/exonum/exonum
